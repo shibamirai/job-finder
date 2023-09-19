@@ -31,7 +31,7 @@ const open = ref(false);
 
                 <template v-if="$page.props.auth.user">
                     <!-- Navigation Links -->
-                    <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                    <!-- <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                         <NavLink :href="route('job-finders.index')" :active="$page.component === 'JobFinders/Index'">
                             就職者一覧
                         </NavLink >
@@ -45,7 +45,7 @@ const open = ref(false);
                         <NavLink :href="route('occupations.index')" :active="$page.component === 'Occupations/Index'">
                             職種編集
                         </NavLink >
-                    </div>
+                    </div> -->
                 </template>
             </div>
 
@@ -67,6 +67,7 @@ const open = ref(false);
 
                         <template #content>
                             <!-- Authentication -->
+                            <DropdownLink :href="route('profile.edit')">{{ $t('Profile') }}</DropdownLink>
                             <DropdownLink :href="route('logout')" method="post" as="button">
                                 {{ $t('Logout') }}
                             </DropdownLink>
@@ -101,7 +102,7 @@ const open = ref(false);
         </div>
         <template v-if="$page.props.auth.user">
             <div class="pt-2 pb-3 space-y-1">
-                <ResponsiveNavLink :href="route('job-finders.index')" :active="$page.component === 'JobFinders/Index'">
+                <!-- <ResponsiveNavLink :href="route('job-finders.index')" :active="$page.component === 'JobFinders/Index'">
                     就職者一覧
                 </ResponsiveNavLink>
                 <ResponsiveNavLink :href="route('job-finders.create')" :active="$page.component === 'JobFinders/Create'">
@@ -109,7 +110,7 @@ const open = ref(false);
                 </ResponsiveNavLink>
                 <ResponsiveNavLink :href="route('occupations.index')" :active="$page.component === 'Occupations/Index'">
                     職種編集
-                </ResponsiveNavLink>
+                </ResponsiveNavLink> -->
             </div>
 
             <!-- Responsive Settings Options -->
@@ -121,6 +122,7 @@ const open = ref(false);
 
                 <div class="mt-3 space-y-1">
                     <!-- Authentication -->
+                    <ResponsiveNavLink :href="route('profile.edit')">{{ $t('Profile') }}</ResponsiveNavLink>
                     <ResponsiveNavLink :href="route('logout')" method="post" as="button">
                         {{ $t('Logout') }}
                     </ResponsiveNavLink>

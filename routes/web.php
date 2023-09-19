@@ -7,11 +7,11 @@ use Illuminate\Support\Facades\Route;
 
 Route::controller(PortfolioController::class)->group(function () {
     Route::redirect('/', 'portfolio');
-    Route::get('portfolio', 'index')->name('index');
-    Route::get('portfolio/{id}', 'show')->name('show');
+    Route::get('/portfolio', 'index')->name('index');
+    Route::get('/portfolio/{id}', 'show')->name('show');
 });
 
-Route::get('statistics', [StatisticController::class, 'index'])->name('statistics');
+Route::get('/statistics', [StatisticController::class, 'index'])->name('statistics');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

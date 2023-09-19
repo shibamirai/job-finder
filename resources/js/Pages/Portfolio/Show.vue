@@ -6,8 +6,8 @@ export default {
 </script>
 
 <script setup>
-import Header from '@/Pages/Portfolio/Header.vue';
 import Detail from '@/Pages/Portfolio/Detail.vue';
+import Header from '@/Components/Header.vue';
 import RoundButton from '@/Components/RoundButton.vue';
 
 defineProps({

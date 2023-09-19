@@ -1,6 +1,6 @@
 <script setup>
 import { ref } from 'vue'
-import Header from '@/Pages/Portfolio/Header.vue'
+import Header from '@/Components/Header.vue'
 import BarChart from '@/Charts/BarChart.vue'
 import HorizontalBarChart from '@/Charts/HorizontalBarChart.vue'
 import PieChart from '@/Charts/PieChart.vue'
