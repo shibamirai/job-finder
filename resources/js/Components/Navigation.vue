@@ -23,21 +23,21 @@ const open = ref(false);
                     </Link>
                 </div>
 
-                <!-- <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <NavLink :href="route('statistics')" :active="$page.component === 'Statistics'">
+                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                    <NavLink :href="route('statistics')" :active="$page.component === 'Statistics/Index'">
                         統計情報
                     </NavLink >
-                </div> -->
+                </div>
 
                 <template v-if="$page.props.auth.user">
                     <!-- Navigation Links -->
                     <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                        <NavLink :href="route('job-finders.index')" :active="$page.component === 'Admin/JobFinders/Index'">
+                        <NavLink :href="route('job-finders.index')" :active="$page.component === 'JobFinders/Index'">
                             就職者一覧
                         </NavLink >
                     </div>
                     <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                        <NavLink :href="route('job-finders.create')" :active="$page.component === 'Admin/JobFinders/Create'">
+                        <NavLink :href="route('job-finders.create')" :active="$page.component === 'JobFinders/Create'">
                             情報登録
                         </NavLink >
                     </div>
@@ -68,7 +68,7 @@ const open = ref(false);
                         <template #content>
                             <!-- Authentication -->
                             <DropdownLink :href="route('logout')" method="post" as="button">
-                                {{ $t('LogOut') }}
+                                {{ $t('Logout') }}
                             </DropdownLink>
                         </template>
                     </Dropdown>
@@ -95,17 +95,20 @@ const open = ref(false);
     <!-- Responsive Navigation Menu -->
     <div :class="{'block': open, 'hidden': ! open}" class="sm:hidden">
         <div class="pt-2 pb-3 space-y-1">
-            <!-- <ResponsiveNavLink :href="route('statistics')" :active="$page.component === 'statistics'">
+            <ResponsiveNavLink :href="route('statistics')" :active="$page.component === 'Statistics/Index'">
                 統計情報
-            </ResponsiveNavLink> -->
+            </ResponsiveNavLink>
         </div>
         <template v-if="$page.props.auth.user">
             <div class="pt-2 pb-3 space-y-1">
-                <ResponsiveNavLink :href="route('job-finders.index')" :active="$page.component === 'job-finders.index'">
+                <ResponsiveNavLink :href="route('job-finders.index')" :active="$page.component === 'JobFinders/Index'">
                     就職者一覧
                 </ResponsiveNavLink>
-                <ResponsiveNavLink :href="route('job-finders.create')" :active="$page.component === 'job-finders.create'">
+                <ResponsiveNavLink :href="route('job-finders.create')" :active="$page.component === 'JobFinders/Create'">
                     情報登録
+                </ResponsiveNavLink>
+                <ResponsiveNavLink :href="route('occupations.index')" :active="$page.component === 'Occupations/Index'">
+                    職種編集
                 </ResponsiveNavLink>
             </div>
 
@@ -119,14 +122,14 @@ const open = ref(false);
                 <div class="mt-3 space-y-1">
                     <!-- Authentication -->
                     <ResponsiveNavLink :href="route('logout')" method="post" as="button">
-                        Log Out
+                        {{ $t('Logout') }}
                     </ResponsiveNavLink>
                 </div>
             </div>
         </template>
         <template v-else>
             <ResponsiveNavLink :href="route('login')" class="text-right">
-                Log In
+                {{ $t('Login') }}
             </ResponsiveNavLink>
         </template>
     </div>
