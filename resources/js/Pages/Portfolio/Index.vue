@@ -1,7 +1,7 @@
 <script setup>
 import Pagenation from '@/Components/Pagination.vue';
-import Header from '@/Pages/JobFinder/Header.vue';
-import Card from '@/Pages/JobFinder/Card.vue';
+import Header from '@/Pages/Portfolio/Header.vue';
+import Card from '@/Pages/Portfolio/Card.vue';
 
 defineProps({
   jobFinders: Object
