@@ -92,7 +92,7 @@ export default {
             </Link>
 
             <PrimaryButton class="ml-4" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
-                {{ $t('Log in') }}
+                {{ $t('Log In') }}
             </PrimaryButton>
         </div>
     </form>

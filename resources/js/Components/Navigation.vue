@@ -31,12 +31,12 @@ const open = ref(false);
 
                 <template v-if="$page.props.auth.user">
                     <!-- Navigation Links -->
-                    <!-- <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                    <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                         <NavLink :href="route('job-finders.index')" :active="$page.component === 'JobFinders/Index'">
                             就職者一覧
                         </NavLink >
                     </div>
-                    <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                    <!-- <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                         <NavLink :href="route('job-finders.create')" :active="$page.component === 'JobFinders/Create'">
                             情報登録
                         </NavLink >
@@ -102,10 +102,10 @@ const open = ref(false);
         </div>
         <template v-if="$page.props.auth.user">
             <div class="pt-2 pb-3 space-y-1">
-                <!-- <ResponsiveNavLink :href="route('job-finders.index')" :active="$page.component === 'JobFinders/Index'">
+                <ResponsiveNavLink :href="route('job-finders.index')" :active="$page.component === 'JobFinders/Index'">
                     就職者一覧
                 </ResponsiveNavLink>
-                <ResponsiveNavLink :href="route('job-finders.create')" :active="$page.component === 'JobFinders/Create'">
+                <!-- <ResponsiveNavLink :href="route('job-finders.create')" :active="$page.component === 'JobFinders/Create'">
                     情報登録
                 </ResponsiveNavLink>
                 <ResponsiveNavLink :href="route('occupations.index')" :active="$page.component === 'Occupations/Index'">
