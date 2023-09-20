@@ -1,12 +1,5 @@
-<script>
-import AppLayout from '@/Layouts/AppLayout.vue';
-export default {
-  layout: AppLayout
-};
-</script>
-
 <script setup>
-import Detail from '@/Pages/Portfolio/Detail.vue';
+import Detail from './Partials/Detail.vue';
 import Header from '@/Components/Header.vue';
 import RoundButton from '@/Components/RoundButton.vue';
 

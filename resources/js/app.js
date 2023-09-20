@@ -8,6 +8,7 @@ import { ZiggyVue } from '../../vendor/tightenco/ziggy/dist/vue.m';
 import { createI18n } from 'vue-i18n';
 import messages from '@intlify/unplugin-vue-i18n/messages';
 import AppLayout from '@/Layouts/AppLayout.vue'
+import VueSelect from 'vue-select'
 
 const appName = import.meta.env.VITE_APP_NAME || 'Laravel';
 
@@ -30,6 +31,7 @@ createInertiaApp({
             .use(i18n)
             .use(ZiggyVue, Ziggy)
             .component('Link', Link)
+            .component('v-select', VueSelect)
             .mount(el);
     },
     progress: {

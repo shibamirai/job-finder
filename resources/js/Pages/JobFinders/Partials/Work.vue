@@ -12,7 +12,7 @@ const props = defineProps({
     type: Object,
   },
   work:  {
-    type: Object,
+    type: Boolean,
     default: false
   },
 })

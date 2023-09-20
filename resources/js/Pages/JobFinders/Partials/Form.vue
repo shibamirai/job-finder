@@ -1,11 +1,12 @@
 <script setup>
-import AvatarSelect from './Partials/AvatarSelect.vue'
+import AvatarSelect from './AvatarSelect.vue'
 import Checkbox from '@/Components/Checkbox.vue'
 import InputLabel from '@/Components/InputLabel.vue'
 import InputError from '@/Components/InputError.vue'
 import TextInput from '@/Components/TextInput.vue'
 import RoundButton from '@/Components/RoundButton.vue'
 import SelectBox from '@/Components/SelectBox.vue'
+import MultiSelectBox from '@/Components/MultiSelectBox.vue'
 import RadioButton from '@/Components/RadioButton.vue'
 import { useForm } from '@inertiajs/vue3';
 import 'vue-select/dist/vue-select.css';
@@ -15,7 +16,7 @@ let props = defineProps({
     type: Object,
     default: false
   },
-  labels: Array,
+  labels: Object,
 })
 
 let form = useForm({
@@ -63,7 +64,7 @@ let submit = () => {
         <InputLabel value="名前" />
 
         <TextInput v-if="jobFinder" class="col-span-5" name="name" type="text" v-model="form.name"
-          placeholder="非公開" readonly />
+          placeholder="非公開" autocomplete="off" readonly />
         <TextInput v-else="jobFinder" class="col-span-5" name="name" type="text" v-model="form.name"
           placeholder="非公開" autocomplete="off" required />
 
@@ -140,12 +141,11 @@ let submit = () => {
       <div class="mt-4 md:grid md:grid-cols-6 items-center">
         <InputLabel value="習得スキル" />
 
-        <SelectBox class="col-span-5"
+        <MultiSelectBox class="col-span-5"
           name="skill"
           :options="labels.skill"
           v-model="form.skills"
           taggable
-          multiple
           placeholder="選択または入力（複数可）"
         />
 

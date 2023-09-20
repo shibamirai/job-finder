@@ -1,6 +1,6 @@
 <script setup>
 import Header from '@/Components/Header.vue'
-import Form from '@/Pages/JobFinders/Form.vue'
+import Form from './Partials/Form.vue'
 
 defineProps({
   'jobFinder': Object,

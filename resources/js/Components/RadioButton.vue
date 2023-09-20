@@ -5,10 +5,11 @@ const emit = defineEmits(['update:modelValue']);
 
 const props = defineProps({
   modelValue: {
-        type: String,
+        type: Number,
         required: true,
     },
-  options: Array
+  options: Array,
+  name: String,
 });
 
 const proxySelected = computed({
@@ -31,6 +32,7 @@ const proxySelected = computed({
           class="text-cyan-500 border-gray-300 focus:border-cyan-300 focus:ring focus:ring-cyan-200 focus:ring-opacity-50"
           type="radio"
           :value="index"
+          :name="name"
           v-model="proxySelected"
         >
         <span class="ml-2 mr-4">{{ option }}</span>

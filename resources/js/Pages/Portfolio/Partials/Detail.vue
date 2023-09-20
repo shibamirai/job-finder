@@ -1,5 +1,5 @@
 <script setup>
-import Portfolio from '@/Pages/Portfolio/Portfolio.vue';
+import Work from './Work.vue';
 
 defineProps({
   jobFinder: Object,
@@ -67,8 +67,7 @@ defineProps({
       </div>
     </div>
     <div class="flex-1 lg:px-10 py-8">
-      <Portfolio v-for="work in jobFinder.works" :key="work.id" :work="work">
-      </Portfolio>
+      <Work v-for="work in jobFinder.works" :key="work.id" :work="work" />
     </div>
   </div>
 </template>

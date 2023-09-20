@@ -3,25 +3,25 @@ import { ref } from 'vue'
 import Tab from '@/Components/Tab.vue'
 import TabItem from '@/Components/TabItem.vue'
 import Header from '@/Components/Header.vue'
-import Portfolio from '@/Pages/JobFinders/Portfolio.vue'
-import Form from '@/Pages/JobFinders/Form.vue'
+import Work from './Partials/Work.vue'
+import Form from './Partials/Form.vue'
 
 const props = defineProps({
     'jobFinder': Object,
-    'labels': Array
+    'labels': Object
 })
 
 const currentComponent = ref('Form')
 const currentTab = ref('Form')
 const components = {
     'Form': Form,
-    'Portfolio': Portfolio
+    'Work': Work
 }
 
-const portfolio = ref()
+const selectedWork = ref()
 const onTabClick = (component, work) => {
     currentComponent.value = component
-    portfolio.value = work
+    selectedWork.value = work
     currentTab.value = component + (work ? work.id : '') 
 }
 </script>
@@ -36,12 +36,12 @@ const onTabClick = (component, work) => {
             {{ jobFinder.name }}さんについて
         </TabItem>
         <TabItem v-for="work in jobFinder.works" :key="work.id"
-            :active="currentTab === 'Portfolio' + work.id"
-            @click="onTabClick('Portfolio', work)"
+            :active="currentTab === 'Work' + work.id"
+            @click="onTabClick('Work', work)"
         >
             作品「{{ work.content }}」
         </TabItem>
-        <TabItem :active="currentTab === 'Portfolio'" @click="onTabClick('Portfolio')">
+        <TabItem :active="currentTab === 'Work'" @click="onTabClick('Work')">
             ポートフォリオ追加
         </TabItem>
     </Tab>
@@ -49,7 +49,7 @@ const onTabClick = (component, work) => {
     <component :is="components[currentComponent]"
         :jobFinder="jobFinder"
         :labels="labels"
-        :work="portfolio"
+        :work="selectedWork"
         @submit="onTabClick('Form')"
     ></component>
 </template>

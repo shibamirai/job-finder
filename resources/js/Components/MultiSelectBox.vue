@@ -2,7 +2,7 @@
 import { computed } from 'vue';
 
 let props = defineProps({
-    modelValue: String,
+    modelValue: Array,
     options: Array,
 });
 
@@ -23,6 +23,7 @@ const proxySelected = computed({
     <v-select
         v-model="proxySelected"
         :options="options"
+        multiple
     ></v-select>
 </template>
 
