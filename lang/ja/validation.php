@@ -247,6 +247,19 @@ return [
         'updated_at' => '更新日',
         'username' => 'ユーザー名',
         'year' => '年',
+
+        'avatar' => 'アバター',
+        'age' => 'required|integer|between:18,65',
+        'handicap' => '障害',
+        'has_certificate' => '手帳有無',
+        'use_from' => '利用開始日',
+        'skills' => 'スキル',
+        'occupation' => '職種',
+        'description' => '仕事内容',
+        'hired_at' => '就労開始日',
+        'employment_pattern' => '雇用形態',
+        'is_handicaps_opened' => '就労スタイル'
+
     ],
 
 ];
