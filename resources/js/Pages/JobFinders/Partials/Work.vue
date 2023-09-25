@@ -12,8 +12,7 @@ const props = defineProps({
     type: Object,
   },
   work:  {
-    type: Boolean,
-    default: false
+    type: Object,
   },
 })
 
@@ -32,7 +31,6 @@ const form = useForm({
 watch(
   () => props.work,
   (work) => {
-    console.log("work updated")
     form.content      = work ? work.content       : ''
     form.title        = work ? work.title         : ''
     form.url          = work ? work.url           : ''
