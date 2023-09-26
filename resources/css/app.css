@@ -1,3 +1,9 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+:root {
+    --toggle-bg-on: rgb(6 182 212 / 1);
+    --toggle-border-on: rgb(6 182 212 / 1);
+}
+  

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\JobFinderController;
+use App\Http\Controllers\OccupationController;
 use App\Http\Controllers\PortfolioController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\StatisticController;
@@ -25,6 +26,11 @@ Route::middleware('auth')->group(function () {
     Route::post('/job-finders/{jobFinder}/works', [WorkController::class, 'store'])->name('job-finders.works.store');
     Route::patch('/job-finders/{jobFinder}/works/{work}', [WorkController::class, 'update'])->name('job-finders.works.update');
     Route::delete('/job-finders/{jobFinder}/works/{work}', [WorkController::class, 'destroy'])->name('job-finders.works.destroy');
+
+    Route::get('/occupations', [OccupationController::class, 'index'])->name('occupations.index');
+    Route::post('/occupations', [OccupationController::class, 'store'])->name('occupations.store');
+    Route::patch('/occupations/{occupation}', [OccupationController::class, 'update'])->name('occupations.update');
+    Route::delete('/occupations/{occupation}', [OccupationController::class, 'destroy'])->name('occupations.destroy');
 });
 
 require __DIR__.'/auth.php';

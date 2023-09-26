@@ -41,11 +41,11 @@ const open = ref(false);
                             情報登録
                         </NavLink >
                     </div>
-                    <!-- <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                    <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                         <NavLink :href="route('occupations.index')" :active="$page.component === 'Occupations/Index'">
                             職種編集
                         </NavLink >
-                    </div> -->
+                    </div>
                 </template>
             </div>
 
@@ -108,9 +108,9 @@ const open = ref(false);
                 <ResponsiveNavLink :href="route('job-finders.create')" :active="$page.component === 'JobFinders/Create'">
                     情報登録
                 </ResponsiveNavLink>
-                <!-- <ResponsiveNavLink :href="route('occupations.index')" :active="$page.component === 'Occupations/Index'">
+                <ResponsiveNavLink :href="route('occupations.index')" :active="$page.component === 'Occupations/Index'">
                     職種編集
-                </ResponsiveNavLink> -->
+                </ResponsiveNavLink>
             </div>
 
             <!-- Responsive Settings Options -->
