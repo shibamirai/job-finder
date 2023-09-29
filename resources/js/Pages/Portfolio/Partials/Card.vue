@@ -23,7 +23,7 @@ defineProps({
           <tr class="border-y-2">
             <th class="text-left font-bold px-4 py-2">障害</th>
             <td>
-              {{ jobFinder.handicap_label }}
+              {{ jobFinder.handicaps.map(handicap => handicap.name).join(", ") }}
               (手帳{{ jobFinder.has_certificate ? 'あり' : 'なし' }})
             </td>
           </tr>

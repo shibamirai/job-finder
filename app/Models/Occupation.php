@@ -12,6 +12,11 @@ class Occupation extends Model
 
     protected $guarded = [];
 
+    protected $hidden = [
+        'created_at',
+        'updated_at',
+    ];
+
     // MySQL では boolean は 0/1でセットされる
     // Vue では checkbox の値は true/false がセットされるため
     // ここで 0/1 を boolean にキャストする

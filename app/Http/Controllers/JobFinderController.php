@@ -4,8 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Enums\EmploymentPattern;
 use App\Enums\Gender;
-use App\Enums\Handicap;
 use App\Http\Requests\JobFinderRequest;
+use App\Models\Handicap;
 use App\Models\JobFinder;
 use App\Models\Occupation;
 use App\Models\Skill;
@@ -25,8 +25,6 @@ class JobFinderController extends Controller
             ->withQueryString();
         foreach ($jobFinders as $jobFinder) {
             $jobFinder->setAppends([
-                'gender_label',
-                'handicap_label',
                 'employment_pattern_label',
                 'hired',
                 'period_of_use'
@@ -40,6 +38,7 @@ class JobFinderController extends Controller
     public function create()
     {
         return Inertia::render('JobFinders/Create',[
+            'handicaps' => Handicap::get(['id', 'name']),
             'labels' => [
                 'avatar' => array_map(
                     fn ($file) => $file->getFilename(), File::files(public_path('avatar'))
@@ -49,7 +48,6 @@ class JobFinderController extends Controller
                 'occupation' => Occupation::get(['name'])
                     ->map(fn ($occupation) => $occupation->name),
                 'gender' => Gender::asSelectArray(),
-                'handicap' => Handicap::asSelectArray(),
                 'employment_pattern' => EmploymentPattern::asSelectArray(),
             ]
         ]);
@@ -63,9 +61,12 @@ class JobFinderController extends Controller
                 'name' => $request->safe()->occupation
             ]);
 
-            $attributes = $request->safe()->except(['skills', 'occupation']);
-            $attributes['occupation_id'] = $occupation->id;
+            $attributes = $request->safe()
+                ->merge(['occupation_id' => $occupation->id])
+                ->except(['skills', 'occupation', 'handicaps']);
             $jobFinder = JobFinder::create($attributes);
+
+            $jobFinder->handicaps()->sync($request->safe()->only('handicaps')['handicaps']);
 
             $skill_ids = [];
             foreach ($request->safe()->skills as $skillName) {
@@ -96,7 +97,8 @@ class JobFinderController extends Controller
     public function edit(string $id)
     {
         return Inertia::render('JobFinders/Edit',[
-            'jobFinder' => JobFinder::with(['skills:name', 'occupation:id,name', 'works'])->find($id),
+            'jobFinder' => JobFinder::with(['skills:name', 'occupation:id,name', 'handicaps:id', 'works'])->find($id),
+            'handicaps' => Handicap::get(['id', 'name']),
             'labels' => [
                 'avatar' => array_map(
                     fn ($file) => $file->getFilename(), File::files(public_path('avatar'))
@@ -106,7 +108,6 @@ class JobFinderController extends Controller
                 'occupation' => Occupation::get(['name'])
                     ->map(fn ($occupation) => $occupation->name),
                 'gender' => Gender::asSelectArray(),
-                'handicap' => Handicap::asSelectArray(),
                 'employment_pattern' => EmploymentPattern::asSelectArray(),
             ]
         ]);
@@ -120,10 +121,13 @@ class JobFinderController extends Controller
                 'name' => $request->safe()->occupation
             ]);
 
-            $attributes = $request->safe()->except(['skills', 'occupation']);
-            $attributes['occupation_id'] = $occupation->id;
+            $attributes = $request->safe()
+                ->merge(['occupation_id' => $occupation->id])
+                ->except(['skills', 'occupation', 'handicaps']);
             $jobFinder->update($attributes);
 
+            $jobFinder->handicaps()->sync($request->safe()->only('handicaps')['handicaps']);
+ 
             $skill_ids = [];
             foreach ($request->safe()->skills as $skillName) {
                 $skill = Skill::firstOrCreate([
@@ -146,6 +150,7 @@ class JobFinderController extends Controller
     {
         try {
             DB::transaction(function () use ($jobFinder) {
+                $jobFinder->handicaps()->detach();
                 $jobFinder->skills()->detach();
                 $jobFinder->delete();
             });

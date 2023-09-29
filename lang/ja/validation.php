@@ -249,8 +249,8 @@ return [
         'year' => '年',
 
         'avatar' => 'アバター',
-        'age' => 'required|integer|between:18,65',
-        'handicap' => '障害',
+        'age' => '年齢',
+        'handicaps' => '障害',
         'has_certificate' => '手帳有無',
         'use_from' => '利用開始日',
         'skills' => 'スキル',

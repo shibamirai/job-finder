@@ -12,19 +12,18 @@ import { useForm } from '@inertiajs/vue3';
 import 'vue-select/dist/vue-select.css';
 
 let props = defineProps({
-  jobFinder: {
-    type: Object,
-    default: false
-  },
+  jobFinder: Object,
+  handicaps: Array,
   labels: Object,
 })
 
 let form = useForm({
   avatar:               props.jobFinder ? props.jobFinder.avatar              : '',
   name:                 props.jobFinder ? props.jobFinder.name                : '',
-  gender:               props.jobFinder ? props.jobFinder.gender              : '',
+  gender:               props.jobFinder ? props.jobFinder.gender              : 0,
   age:                  props.jobFinder ? props.jobFinder.age                 : '',
-  handicap:             props.jobFinder ? props.jobFinder.handicap            : '',
+  handicaps:            props.jobFinder ? props.jobFinder.handicaps
+                                                .map(handicap => handicap.id) : [],
   has_certificate:      props.jobFinder ? props.jobFinder.has_certificate     : false,
   use_from:             props.jobFinder ? props.jobFinder.use_from            : '',
   skills:               props.jobFinder ? props.jobFinder.skills
@@ -32,7 +31,7 @@ let form = useForm({
   occupation:           props.jobFinder ? props.jobFinder.occupation.name     : '',
   description:          props.jobFinder ? props.jobFinder.description         : '',
   hired_at:             props.jobFinder ? props.jobFinder.hired_at            : '',
-  employment_pattern:   props.jobFinder ? props.jobFinder.employment_pattern  : '',
+  employment_pattern:   props.jobFinder ? props.jobFinder.employment_pattern  : 0,
   is_handicaps_opened:  props.jobFinder ? props.jobFinder.is_handicaps_opened : false,
 })
 
@@ -101,13 +100,12 @@ let submit = () => {
       <div class="mt-4 md:grid md:grid-cols-6 items-center">
         <InputLabel value="障害" />
 
-        <RadioButton class="col-span-5"
-          name="handicap"
-          :options="labels.handicap"
-          v-model="form.handicap"
-        />
+        <label v-for="handicap in handicaps" :key="handicap.id" class="flex items-center">
+            <Checkbox name="handicaps" v-model:checked="form.handicaps" :value="handicap.id"/>
+            <span class="ml-2 mr-4">{{ handicap.name }}</span>
+        </label>
 
-        <InputError v-if="form.errors.handicap" :message="form.errors.handicap" class="col-start-2 col-span-5" />
+        <InputError v-if="form.errors.handicaps" :message="form.errors.handicaps" class="col-start-2 col-span-5" />
       </div>
 
       <!-- 手帳有無 -->

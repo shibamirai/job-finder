@@ -17,7 +17,6 @@ return new class extends Migration
             $table->string('name');
             $table->integer('gender')->default(0);
             $table->integer('age');
-            $table->integer('handicap')->default(0);
             $table->boolean('has_certificate')->default(false);
             $table->date('use_from');
             $table->foreignId('occupation_id')->constrained();

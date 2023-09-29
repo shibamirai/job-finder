@@ -88,7 +88,7 @@ function tabClicked(id) {
       />
       <HorizontalBarChart
         v-if="open === 4"
-        :data="skills.map((skill) => skill.count)"
+        :data="skills.map((skill) => skill.masters_count)"
         :labels="skills.map((skill) => skill.name)"
       />
       <PieChart
@@ -98,7 +98,7 @@ function tabClicked(id) {
       />
       <PieChart
         v-if="open === 6"
-        :data="handicaps.map((handicap) => handicap.count)"
+        :data="handicaps.map((handicap) => handicap.affects_count)"
         :labels="handicaps.map((handicap) => handicap.name)"
       />
     </main>

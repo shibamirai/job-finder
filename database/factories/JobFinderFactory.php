@@ -29,7 +29,6 @@ class JobFinderFactory extends Factory
             'name' => $this->faker->name(),
             'gender' => $this->faker->numberBetween(0, 2),
             'age' => $this->faker->numberBetween(19, 55),
-            'handicap' => $this->faker->numberBetween(0, 3),
             'has_certificate' => $this->faker->boolean(80),
             'use_from' => $use_from->format('Y-m-d'),
             'occupation_id' => Occupation::factory(),

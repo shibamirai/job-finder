@@ -3,8 +3,8 @@ import Header from '@/Components/Header.vue'
 import Form from './Partials/Form.vue'
 
 defineProps({
-  'jobFinder': Object,
-  'labels': Array,
+  'handicaps': Array,
+  'labels': Object,
 })
 </script>
 <template>
@@ -12,5 +12,5 @@ defineProps({
     就職者さんデータ入力フォーム
   </Header>
 
-  <Form :jobFinder="jobFinder" :labels="labels" />
+  <Form :handicaps="handicaps" :labels="labels" />
 </template>

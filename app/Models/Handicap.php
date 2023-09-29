@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
-class Skill extends Model
+class Handicap extends Model
 {
     use HasFactory;
 
@@ -17,7 +17,7 @@ class Skill extends Model
         'updated_at',
     ];
 
-    public function masters(): BelongsToMany
+    public function affects(): BelongsToMany
     {
         return $this->belongsToMany(JobFinder::class);
     }

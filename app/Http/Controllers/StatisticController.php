@@ -4,8 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Enums\EmploymentPattern;
 use App\Enums\Gender;
-use App\Enums\Handicap;
+use App\Models\Handicap;
 use App\Models\JobFinder;
+use App\Models\Skill;
 use Illuminate\Support\Facades\DB;
 use Inertia\Inertia;
 use Inertia\Response;
@@ -25,17 +26,6 @@ class StatisticController extends Controller
         // [0:非公表]を配列の最後へ移動
         array_push($genders, array_shift($genders));
 
-        // 障害別人数
-        $handicaps = [];
-        foreach (Handicap::cases() as $case) {
-            $handicaps[] = [
-                'name' => $case->label(),
-                'count' => JobFinder::where('handicap', $case)->count()
-            ];
-        }
-        // [0:非公表]を配列の最後へ移動
-        array_push($handicaps, array_shift($handicaps));
-
         // 雇用形態別人数
         $employment_patterns = [];
         foreach (EmploymentPattern::cases() as $case) {
@@ -54,13 +44,7 @@ class StatisticController extends Controller
             'ages' => JobFinder::get(['age'])
                 ->map(fn ($jobFinder) => $jobFinder->age),
             // スキル別人数
-            'skills' => DB::table('job_finder_skill')
-                ->leftJoin('skills', 'job_finder_skill.skill_id', '=', 'skills.id')
-                ->select('skills.name', DB::raw("count(skills.name) as count"))
-                ->groupBy('skills.name')
-                ->orderBy('count', 'desc')
-                ->get()
-                ->toArray(),
+            'skills' => Skill::withCount(['masters'])->get()->toArray(),
             // IT系職種の人数
             'count_it' => JobFinder::whereHas('occupation', function ($q) {
                 $q->where('is_it', 1);
@@ -68,7 +52,7 @@ class StatisticController extends Controller
             // 性別ごとの人数
             'genders' => $genders,
             // 障害別人数
-            'handicaps' => $handicaps,
+            'handicaps' => Handicap::withCount(['affects'])->get()->toArray(),
             // 雇用形態別人数
             'employment_patterns' => $employment_patterns,
         ]);
