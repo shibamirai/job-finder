@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Handicap;
 use App\Models\JobFinder;
 use App\Models\Occupation;
 use App\Models\Skill;
@@ -16,6 +17,7 @@ class DummySeeder extends Seeder
      */
     public function run(): void
     {
+        $handicaps = Handicap::all();
         $skills = Skill::factory()
             ->count(3)
             ->state(new Sequence(
@@ -29,20 +31,24 @@ class DummySeeder extends Seeder
             ->state(new Sequence(
                 ['name' => 'プログラマ', 'is_it' => true],
                 ['name' => 'システムエンジニア', 'is_it' => true],
-                ['name' => '営業'],
-                ['name' => '接客'],
-                ['name' => '事務'],
+                ['name' => '営業', 'is_it' => false],
+                ['name' => '接客', 'is_it' => false],
+                ['name' => '事務', 'is_it' => false],
             ))
             ->create();
         $jobFinders = JobFinder::factory()
             ->count(50)
             ->recycle($occupations)
             ->create()
-            ->each(fn ($jobFinder) =>
+            ->each(function ($jobFinder) use ($handicaps, $skills) {
+                $jobFinder
+                    ->handicaps()
+                    ->attach($handicaps->random(random_int(1, 4)));
                 $jobFinder
                     ->skills()
-                    ->attach($skills->random(random_int(1, 3)))
-            );
+                    ->attach($skills->random(random_int(1, 3)));
+                return $jobFinder;
+            });
         Work::factory(10)
             ->recycle($jobFinders)
             ->create();
