@@ -3,6 +3,7 @@ import Header from '@/Components/Header.vue'
 import Form from './Partials/Form.vue'
 
 defineProps({
+  'employmentPatterns': Array,
   'handicaps': Array,
   'labels': Object,
 })
@@ -12,5 +13,9 @@ defineProps({
     就職者さんデータ入力フォーム
   </Header>
 
-  <Form :handicaps="handicaps" :labels="labels" />
+  <Form
+    :employmentPatterns="employmentPatterns"
+    :handicaps="handicaps"
+    :labels="labels"
+  />
 </template>

@@ -83,7 +83,7 @@ const deleteSubmit = (id) => {
                 {{ jobFinder.occupation.name }}
               </td>
               <td class="px-6 py-3 hidden lg:table-cell">
-                {{ jobFinder.employment_pattern_label }}({{ jobFinder.is_handicaps_opened ? 'オープン' : 'クローズ' }})
+                {{ jobFinder.employment_pattern.name }}({{ jobFinder.is_handicaps_opened ? 'オープン' : 'クローズ' }})
               </td>
               <td class="px-6 py-3 hidden md:table-cell">
                 {{ jobFinder.hired }}

@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Enums\EmploymentPattern;
 use App\Enums\Gender;
+use App\Models\EmploymentPattern;
 use App\Models\Handicap;
 use App\Models\JobFinder;
 use App\Models\Skill;
@@ -26,17 +26,6 @@ class StatisticController extends Controller
         // [0:非公表]を配列の最後へ移動
         array_push($genders, array_shift($genders));
 
-        // 雇用形態別人数
-        $employment_patterns = [];
-        foreach (EmploymentPattern::cases() as $case) {
-            $employment_patterns[] = [
-                'name' => $case->label(),
-                'count' => JobFinder::where('employment_pattern', $case)->count()
-            ];
-        }
-        // [0:不明]を配列の最後へ移動
-        array_push($employment_patterns, array_shift($employment_patterns));
-
         return Inertia::render('Statistics/Index', [
             // 総就職人数
             'total' => JobFinder::count(),
@@ -54,7 +43,7 @@ class StatisticController extends Controller
             // 障害別人数
             'handicaps' => Handicap::withCount(['affects'])->get()->toArray(),
             // 雇用形態別人数
-            'employment_patterns' => $employment_patterns,
+            'employment_patterns' => EmploymentPattern::withCount('workers')->orderBy('sort')->get()->toArray(),
         ]);
     }
 }

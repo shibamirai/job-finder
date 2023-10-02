@@ -12,6 +12,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
+        $this->call(EmploymentPatternSeeder::class);
         $this->call(HandicapSeeder::class);
     }
 }

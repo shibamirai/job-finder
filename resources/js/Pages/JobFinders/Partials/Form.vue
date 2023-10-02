@@ -13,6 +13,7 @@ import 'vue-select/dist/vue-select.css';
 
 let props = defineProps({
   jobFinder: Object,
+  employmentPatterns: Array,
   handicaps: Array,
   labels: Object,
 })
@@ -31,7 +32,7 @@ let form = useForm({
   occupation:           props.jobFinder ? props.jobFinder.occupation.name     : '',
   description:          props.jobFinder ? props.jobFinder.description         : '',
   hired_at:             props.jobFinder ? props.jobFinder.hired_at            : '',
-  employment_pattern:   props.jobFinder ? props.jobFinder.employment_pattern  : 0,
+  employment_pattern_id:props.jobFinder ? props.jobFinder.employment_pattern.id: 1,
   is_handicaps_opened:  props.jobFinder ? props.jobFinder.is_handicaps_opened : false,
 })
 
@@ -74,7 +75,14 @@ let submit = () => {
       <div class="mt-4 md:grid md:grid-cols-6 items-center">
         <InputLabel value="性別" />
 
-        <RadioButton class="col-span-5" name="gender" :options="labels.gender" v-model="form.gender" />
+        <div class="flex flex-wrap items-center col-span-5">
+          <div v-for="(option, index) in labels.gender" :key="index">
+            <label>
+              <RadioButton v-model="form.gender" :value="index" name="gender"/>
+              <span class="ml-2 mr-4">{{ option }}</span>
+            </label>
+          </div>
+        </div>
 
         <InputError v-if="form.errors.gender" :message="form.errors.gender" class="col-start-2 col-span-5" />
       </div>
@@ -191,13 +199,16 @@ let submit = () => {
       <div class="mt-4 md:grid md:grid-cols-6 items-center">
         <InputLabel value="雇用形態" />
 
-        <RadioButton class="col-span-5"
-          name="employment_pattern"
-          :options="labels.employment_pattern"
-          v-model="form.employment_pattern"
-        />
+        <div class="flex flex-wrap items-center col-span-5">
+          <div v-for="employment_pattern in employmentPatterns" :key="employment_pattern.id">
+            <label>
+              <RadioButton v-model="form.employment_pattern_id" :value="employment_pattern.id" name="employment_pattern_id"/>
+              <span class="ml-2 mr-4">{{ employment_pattern.name }}</span>
+            </label>
+          </div>
+        </div>
 
-        <InputError v-if="form.errors.employment_pattern" :message="form.errors.employment_pattern" class="col-start-2 col-span-5" />
+        <InputError v-if="form.errors.employment_pattern_id" :message="form.errors.employment_pattern_id" class="col-start-2 col-span-5" />
       </div>
 
       <!-- 就労スタイル -->

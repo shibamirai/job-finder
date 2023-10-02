@@ -2,7 +2,6 @@
 
 namespace App\Http\Requests;
 
-use App\Enums\EmploymentPattern;
 use App\Enums\Gender;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
@@ -40,7 +39,7 @@ class JobFinderRequest extends FormRequest
             'occupation' => 'required',
             'description' => 'nullable',
             'hired_at' => 'required',
-            'employment_pattern' => ['required', new Enum(EmploymentPattern::class)],
+            'employment_pattern_id' => 'required',
             'is_handicaps_opened' => ['required']
         ];
     }

@@ -1,5 +1,7 @@
 <?php
 
+use App\Models\EmploymentPattern;
+use App\Models\Occupation;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -19,10 +21,10 @@ return new class extends Migration
             $table->integer('age');
             $table->boolean('has_certificate')->default(false);
             $table->date('use_from');
-            $table->foreignId('occupation_id')->constrained();
+            $table->foreignIdFor(Occupation::class)->constrained();
             $table->string('description')->nullable();
             $table->date('hired_at');
-            $table->integer('employment_pattern');
+            $table->foreignIdFor(EmploymentPattern::class)->constrained();
             $table->boolean('is_handicaps_opened');
             $table->timestamps();
         });

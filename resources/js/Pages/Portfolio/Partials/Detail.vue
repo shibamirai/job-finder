@@ -59,7 +59,7 @@ defineProps({
           <tr class="border-y-2">
             <th class="text-left font-bold px-4 py-2">雇用形態</th>
             <td>
-              {{ jobFinder.employment_pattern_label }}
+              {{ jobFinder.employment_pattern.name }}
               ({{ jobFinder.is_handicaps_opened ? 'オープン' : 'クローズ' }}就労)
             </td>
           </tr>

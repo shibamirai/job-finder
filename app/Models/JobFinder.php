@@ -2,8 +2,8 @@
 
 namespace App\Models;
 
-use App\Enums\EmploymentPattern;
 use App\Enums\Gender;
+use App\Models\EmploymentPattern;
 use DateTime;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -20,7 +20,6 @@ class JobFinder extends Model
 
     protected $casts = [
         'gender' => Gender::class,
-        'employment_pattern' => EmploymentPattern::class,
         'has_certificate' => 'boolean',
         'is_handicaps_opened' => 'boolean',
     ];
@@ -54,6 +53,11 @@ class JobFinder extends Model
         return $this->belongsTo(Occupation::class);
     }
 
+    public function employmentPattern(): BelongsTo
+    {
+        return $this->belongsTo(EmploymentPattern::class);
+    }
+
     public function works(): HasMany
     {
         return $this->hasMany(Work::class);
@@ -68,13 +72,6 @@ class JobFinder extends Model
     {
         return new Attribute(
             get: fn () => $this->gender->label()
-        );
-    }
-
-    public function employmentPatternLabel(): Attribute
-    {
-        return new Attribute(
-            get: fn () => $this->employment_pattern->label()
         );
     }
 

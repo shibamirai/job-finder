@@ -8,7 +8,7 @@ const props = defineProps({
         type: Number,
         required: true,
     },
-  options: Array,
+  value: Number,
   name: String,
 });
 
@@ -25,18 +25,11 @@ const proxySelected = computed({
 </script>
 
 <template>
-  <div class="flex flex-wrap items-center">
-    <div v-for="(option, index) in options" :key="index">
-      <label>
-        <input 
-          class="text-cyan-500 border-gray-300 focus:border-cyan-300 focus:ring focus:ring-cyan-200 focus:ring-opacity-50"
-          type="radio"
-          :value="index"
-          :name="name"
-          v-model="proxySelected"
-        >
-        <span class="ml-2 mr-4">{{ option }}</span>
-      </label>
-    </div>
-  </div>
+  <input 
+    class="text-cyan-500 border-gray-300 focus:border-cyan-300 focus:ring focus:ring-cyan-200 focus:ring-opacity-50"
+    type="radio"
+    :value="value"
+    :name="name"
+    v-model="proxySelected"
+  >
 </template>

@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Enums\EmploymentPattern;
 use App\Enums\Gender;
 use App\Http\Requests\JobFinderRequest;
+use App\Models\EmploymentPattern;
 use App\Models\Handicap;
 use App\Models\JobFinder;
 use App\Models\Occupation;
@@ -17,7 +17,7 @@ class JobFinderController extends Controller
 {
     public function index()
     {
-        $jobFinders = JobFinder::with(['occupation:id,name'])
+        $jobFinders = JobFinder::with(['employmentPattern:id,name','occupation:id,name'])
             ->orderBy('hired_at', 'desc')
             ->orderBy('id')
             ->filter(request(['search']))
@@ -25,7 +25,6 @@ class JobFinderController extends Controller
             ->withQueryString();
         foreach ($jobFinders as $jobFinder) {
             $jobFinder->setAppends([
-                'employment_pattern_label',
                 'hired',
                 'period_of_use'
             ]);
@@ -39,6 +38,7 @@ class JobFinderController extends Controller
     {
         return Inertia::render('JobFinders/Create',[
             'handicaps' => Handicap::get(['id', 'name']),
+            'employmentPatterns' => EmploymentPattern::orderBy('sort')->get(['id', 'name']),
             'labels' => [
                 'avatar' => array_map(
                     fn ($file) => $file->getFilename(), File::files(public_path('avatar'))
@@ -48,7 +48,6 @@ class JobFinderController extends Controller
                 'occupation' => Occupation::get(['name'])
                     ->map(fn ($occupation) => $occupation->name),
                 'gender' => Gender::asSelectArray(),
-                'employment_pattern' => EmploymentPattern::asSelectArray(),
             ]
         ]);
     }
@@ -97,8 +96,9 @@ class JobFinderController extends Controller
     public function edit(string $id)
     {
         return Inertia::render('JobFinders/Edit',[
-            'jobFinder' => JobFinder::with(['skills:name', 'occupation:id,name', 'handicaps:id', 'works'])->find($id),
+            'jobFinder' => JobFinder::with(['skills:name', 'employmentPattern:id,name', 'occupation:id,name', 'handicaps:id', 'works'])->find($id),
             'handicaps' => Handicap::get(['id', 'name']),
+            'employmentPatterns' => EmploymentPattern::orderBy('sort')->get(['id', 'name']),
             'labels' => [
                 'avatar' => array_map(
                     fn ($file) => $file->getFilename(), File::files(public_path('avatar'))
@@ -108,7 +108,6 @@ class JobFinderController extends Controller
                 'occupation' => Occupation::get(['name'])
                     ->map(fn ($occupation) => $occupation->name),
                 'gender' => Gender::asSelectArray(),
-                'employment_pattern' => EmploymentPattern::asSelectArray(),
             ]
         ]);
     }

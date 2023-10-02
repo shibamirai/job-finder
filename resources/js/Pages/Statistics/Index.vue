@@ -78,7 +78,7 @@ function tabClicked(id) {
       />
       <HorizontalBarChart
         v-if="open === 2"
-        :data="employment_patterns.map((ep) => ep.count)"
+        :data="employment_patterns.map((ep) => ep.workers_count)"
         :labels="employment_patterns.map((ep) => ep.name)"
       />
       <PieChart
