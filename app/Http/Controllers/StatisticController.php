@@ -2,12 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Enums\Gender;
 use App\Models\EmploymentPattern;
+use App\Models\Gender;
 use App\Models\Handicap;
 use App\Models\JobFinder;
 use App\Models\Skill;
-use Illuminate\Support\Facades\DB;
 use Inertia\Inertia;
 use Inertia\Response;
 
@@ -15,17 +14,6 @@ class StatisticController extends Controller
 {
     public function index() : Response
     {
-        // 性別ごとの人数
-        $genders = [];
-        foreach (Gender::cases() as $case) {
-            $genders[] = [
-                'name' => $case->label(),
-                'count' => JobFinder::where('gender', $case)->count()
-            ];
-        }
-        // [0:非公表]を配列の最後へ移動
-        array_push($genders, array_shift($genders));
-
         return Inertia::render('Statistics/Index', [
             // 総就職人数
             'total' => JobFinder::count(),
@@ -39,9 +27,9 @@ class StatisticController extends Controller
                 $q->where('is_it', 1);
             })->count(),
             // 性別ごとの人数
-            'genders' => $genders,
+            'genders' => Gender::withCount('workers')->orderBy('sort')->get()->toArray(),
             // 障害別人数
-            'handicaps' => Handicap::withCount(['affects'])->get()->toArray(),
+            'handicaps' => Handicap::withCount(['affects'])->orderBy('sort')->get()->toArray(),
             // 雇用形態別人数
             'employment_patterns' => EmploymentPattern::withCount('workers')->orderBy('sort')->get()->toArray(),
         ]);

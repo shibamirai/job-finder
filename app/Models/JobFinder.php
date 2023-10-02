@@ -2,8 +2,6 @@
 
 namespace App\Models;
 
-use App\Enums\Gender;
-use App\Models\EmploymentPattern;
 use DateTime;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -19,7 +17,6 @@ class JobFinder extends Model
     protected $guarded = [];
 
     protected $casts = [
-        'gender' => Gender::class,
         'has_certificate' => 'boolean',
         'is_handicaps_opened' => 'boolean',
     ];
@@ -43,24 +40,14 @@ class JobFinder extends Model
         );
     }
 
-    public function skills(): BelongsToMany
-    {
-        return $this->belongsToMany(Skill::class);
-    }
-
-    public function occupation(): BelongsTo
-    {
-        return $this->belongsTo(Occupation::class);
-    }
-
     public function employmentPattern(): BelongsTo
     {
         return $this->belongsTo(EmploymentPattern::class);
     }
 
-    public function works(): HasMany
+    public function gender(): BelongsTo
     {
-        return $this->hasMany(Work::class);
+        return $this->belongsTo(Gender::class);
     }
 
     public function handicaps(): BelongsToMany
@@ -68,11 +55,19 @@ class JobFinder extends Model
         return $this->belongsToMany(Handicap::class);
     }
 
-    public function genderLabel(): Attribute
+    public function occupation(): BelongsTo
     {
-        return new Attribute(
-            get: fn () => $this->gender->label()
-        );
+        return $this->belongsTo(Occupation::class);
+    }
+
+    public function skills(): BelongsToMany
+    {
+        return $this->belongsToMany(Skill::class);
+    }
+
+    public function works(): HasMany
+    {
+        return $this->hasMany(Work::class);
     }
 
     public function hired(): Attribute

@@ -9,6 +9,7 @@ import Form from './Partials/Form.vue'
 const props = defineProps({
     'jobFinder': Object,
     'employmentPatterns': Array,
+    'genders': Array,
     'handicaps': Array,
     'labels': Object
 })
@@ -51,6 +52,7 @@ const onTabClick = (component, work) => {
     <component :is="components[currentComponent]"
         :jobFinder="jobFinder"
         :employmentPatterns="employmentPatterns"
+        :genders="genders"
         :handicaps="handicaps"
         :labels="labels"
         :work="selectedWork"

@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\EmploymentPattern;
+use App\Models\Gender;
 use App\Models\Occupation;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
@@ -17,7 +18,7 @@ return new class extends Migration
             $table->id();
             $table->string('avatar');
             $table->string('name');
-            $table->integer('gender')->default(0);
+            $table->foreignIdFor(Gender::class)->constrained();
             $table->integer('age');
             $table->boolean('has_certificate')->default(false);
             $table->date('use_from');

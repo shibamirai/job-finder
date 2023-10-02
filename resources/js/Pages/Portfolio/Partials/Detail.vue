@@ -21,7 +21,7 @@ defineProps({
             <div>
               <div class="flex items-center">
                 <p class="text-xl font-bold mr-4">{{ jobFinder.name }}</p>
-                <p class="text-sm">{{ jobFinder.age }}歳 {{ jobFinder.gender_label }}</p>
+                <p class="text-sm">{{ jobFinder.age }}歳 {{ jobFinder.gender.name }}</p>
               </div>
               <p class="text-xl font-bold text-cyan-500 tracking-wider">{{ jobFinder.occupation.name }}</p>
             </div>
@@ -30,7 +30,7 @@ defineProps({
         <div v-else>
           <img :src="'../avatar/' + jobFinder.avatar" alt=""
             class="rounded-full w-48 border-4 border-gray-500">
-          <p class="relative left-14">{{ jobFinder.age }}歳 {{ jobFinder.gender_label }}</p>
+          <p class="relative left-14">{{ jobFinder.age }}歳 {{ jobFinder.gender.name }}</p>
           <p class="text-2xl font-bold text-cyan-500 tracking-wider py-1">{{ jobFinder.occupation.name }}</p>
         </div>
         <p class="">{{ jobFinder.description }}</p>

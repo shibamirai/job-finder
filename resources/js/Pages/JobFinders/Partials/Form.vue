@@ -14,26 +14,27 @@ import 'vue-select/dist/vue-select.css';
 let props = defineProps({
   jobFinder: Object,
   employmentPatterns: Array,
+  genders: Array,
   handicaps: Array,
   labels: Object,
 })
 
 let form = useForm({
-  avatar:               props.jobFinder ? props.jobFinder.avatar              : '',
-  name:                 props.jobFinder ? props.jobFinder.name                : '',
-  gender:               props.jobFinder ? props.jobFinder.gender              : 0,
-  age:                  props.jobFinder ? props.jobFinder.age                 : '',
-  handicaps:            props.jobFinder ? props.jobFinder.handicaps
-                                                .map(handicap => handicap.id) : [],
-  has_certificate:      props.jobFinder ? props.jobFinder.has_certificate     : false,
-  use_from:             props.jobFinder ? props.jobFinder.use_from            : '',
-  skills:               props.jobFinder ? props.jobFinder.skills
-                                                    .map(skill => skill.name) : [],
-  occupation:           props.jobFinder ? props.jobFinder.occupation.name     : '',
-  description:          props.jobFinder ? props.jobFinder.description         : '',
-  hired_at:             props.jobFinder ? props.jobFinder.hired_at            : '',
-  employment_pattern_id:props.jobFinder ? props.jobFinder.employment_pattern.id: 1,
-  is_handicaps_opened:  props.jobFinder ? props.jobFinder.is_handicaps_opened : false,
+  avatar:                 props.jobFinder ? props.jobFinder.avatar                : '',
+  name:                   props.jobFinder ? props.jobFinder.name                  : '',
+  gender_id:              props.jobFinder ? props.jobFinder.gender.id             : 1,
+  age:                    props.jobFinder ? props.jobFinder.age                   : '',
+  handicaps:              props.jobFinder ? props.jobFinder.handicaps
+                                                .map(handicap => handicap.id)     : [],
+  has_certificate:        props.jobFinder ? props.jobFinder.has_certificate       : false,
+  use_from:               props.jobFinder ? props.jobFinder.use_from              : '',
+  skills:                 props.jobFinder ? props.jobFinder.skills
+                                                .map(skill => skill.name)         : [],
+  occupation:             props.jobFinder ? props.jobFinder.occupation.name       : '',
+  description:            props.jobFinder ? props.jobFinder.description           : '',
+  hired_at:               props.jobFinder ? props.jobFinder.hired_at              : '',
+  employment_pattern_id:  props.jobFinder ? props.jobFinder.employment_pattern.id : 1,
+  is_handicaps_opened:    props.jobFinder ? props.jobFinder.is_handicaps_opened   : false,
 })
 
 let submit = () => {
@@ -76,10 +77,10 @@ let submit = () => {
         <InputLabel value="性別" />
 
         <div class="flex flex-wrap items-center col-span-5">
-          <div v-for="(option, index) in labels.gender" :key="index">
+          <div v-for="gender in genders" :key="gender.id">
             <label>
-              <RadioButton v-model="form.gender" :value="index" name="gender"/>
-              <span class="ml-2 mr-4">{{ option }}</span>
+              <RadioButton v-model="form.gender_id" :value="gender.id" name="gender_id"/>
+              <span class="ml-2 mr-4">{{ gender.name }}</span>
             </label>
           </div>
         </div>

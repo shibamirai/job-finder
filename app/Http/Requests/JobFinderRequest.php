@@ -30,7 +30,7 @@ class JobFinderRequest extends FormRequest
             'avatar' => 'required',
             // 'name' => ['required', Rule::unique('job_finders')->ignore($this->route()->parameter('job_finder'))],
             'name' => ['required', Rule::unique('job_finders')->ignore($this->job_finder)],
-            'gender' => ['required', new Enum(Gender::class)],
+            'gender_id' => 'required',
             'age' => 'required|integer|between:18,65',
             'handicaps' => 'required',
             'has_certificate' => 'required',

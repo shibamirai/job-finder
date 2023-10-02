@@ -93,7 +93,7 @@ function tabClicked(id) {
       />
       <PieChart
         v-if="open === 5"
-        :data="genders.map((gender) => gender.count)"
+        :data="genders.map((gender) => gender.workers_count)"
         :labels="genders.map((gender) => gender.name)"
       />
       <PieChart

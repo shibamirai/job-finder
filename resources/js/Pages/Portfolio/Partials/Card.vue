@@ -13,7 +13,7 @@ defineProps({
       <header class="flex items-center">
         <img :src="'avatar/' + jobFinder.avatar" alt="" class="rounded-full mr-4 w-16 border border-gray-00">
         <div>
-          <p class="text-sm">{{ jobFinder.age }}歳 {{ jobFinder.gender_label }}</p>
+          <p class="text-sm">{{ jobFinder.age }}歳 {{ jobFinder.gender.name }}</p>
           <p class="text-xl font-bold text-cyan-500 tracking-wider">{{ jobFinder.occupation.name }}</p>
           <p class="text-sm">{{ jobFinder.description.substr(32) }}</p>
         </div>

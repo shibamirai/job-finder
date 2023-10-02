@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use App\Models\EmploymentPattern;
+use App\Models\Gender;
 use App\Models\Occupation;
 use DateTime;
 use Illuminate\Database\Eloquent\Factories\Factory;
@@ -23,6 +24,7 @@ class JobFinderFactory extends Factory
     public function definition(): array
     {
         $avatars = array_map(fn($file) => $file->getFilename(), File::files(public_path('avatar')));
+        $genders = Gender::get('id')->toArray();
         $occupations = Occupation::get('id')->toArray();
         $employmentPatterns = EmploymentPattern::get('id')->toArray();
         $use_from = $this->faker->dateTimeBetween('-4 years', '-1 year');
@@ -31,7 +33,7 @@ class JobFinderFactory extends Factory
         return [
             'avatar' => Arr::random($avatars),
             'name' => $this->faker->name(),
-            'gender' => $this->faker->numberBetween(0, 2),
+            'gender_id' => Arr::random($genders)['id'],
             'age' => $this->faker->numberBetween(19, 55),
             'has_certificate' => $this->faker->boolean(80),
             'use_from' => $use_from->format('Y-m-d'),
