@@ -14,5 +14,7 @@ class DatabaseSeeder extends Seeder
         $this->call(EmploymentPatternSeeder::class);
         $this->call(GenderSeeder::class);
         $this->call(HandicapSeeder::class);
+        $this->call(OccupationSeeder::class);
+        $this->call(SkillSeeder::class);
     }
 }

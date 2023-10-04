@@ -2,10 +2,8 @@
 
 namespace App\Http\Requests;
 
-use App\Enums\Gender;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
-use Illuminate\Validation\Rules\Enum;
 
 class JobFinderRequest extends FormRequest
 {
@@ -32,7 +30,7 @@ class JobFinderRequest extends FormRequest
             'name' => ['required', Rule::unique('job_finders')->ignore($this->job_finder)],
             'gender_id' => 'required',
             'age' => 'required|integer|between:18,65',
-            'handicaps' => 'required',
+            'handicaps' => 'nullable',
             'has_certificate' => 'required',
             'use_from' => 'required',
             'skills' => 'nullable',

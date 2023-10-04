@@ -12,21 +12,8 @@ class HandicapSeeder extends Seeder
      */
     public function run(): void
     {
-        Handicap::create([
-            'name' => '非公表',
-            'sort' => 4,
-        ]);
-        Handicap::create([
-            'name' => '精神',
-            'sort' => 1,
-        ]);
-        Handicap::create([
-            'name' => '身体',
-            'sort' => 2,
-        ]);
-        Handicap::create([
-            'name' => '療育',
-            'sort' => 3,
-        ]);
+        Handicap::create(['name' => '精神', 'sort' => 1]);
+        Handicap::create(['name' => '身体', 'sort' => 2]);
+        Handicap::create(['name' => '療育', 'sort' => 3]);
     }
 }
