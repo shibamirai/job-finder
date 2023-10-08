@@ -9,7 +9,7 @@ import { Link } from '@inertiajs/vue3';
             class="w-full sm:max-w-md mt-6 px-6 py-4 bg-white shadow-md overflow-hidden sm:rounded-lg"
         >
             <div class="flex flex-col items-center mb-6">
-                <Link :href="route('index')">
+                <Link :href="route('portfolio.index')">
                     <ApplicationLogo class="w-48 fill-current text-gray-500" />
                 </Link>
             </div>

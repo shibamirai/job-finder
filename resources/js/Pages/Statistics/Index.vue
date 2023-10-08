@@ -14,31 +14,46 @@ let props = defineProps({
   handicaps: Array,
   employment_patterns: Array,
   skills: Array,
+  days_of_uses: Array,
 })
 
 const ageLabels = ['～24歳', '25～29歳', '30～34歳', '35～39歳', '40～44歳', '45～49歳', '50～54歳', '55～59歳', '60歳以上'];
 const ageData   = [0, 0, 0, 0, 0, 0, 0, 0, 0];
-props.ages.forEach(age => {
-  if (age < 25) {
+for (let i = 0; i < props.ages.length; i++) {
+  if (props.ages[i] < 25) {
     ageData[0]++;
-  } else if (age < 30) {
+  } else if (props.ages[i] < 30) {
     ageData[1]++;
-  } else if (age < 35) {
+  } else if (props.ages[i] < 35) {
     ageData[2]++;
-  } else if (age < 40) {
+  } else if (props.ages[i] < 40) {
     ageData[3]++;
-  } else if (age < 45) {
+  } else if (props.ages[i] < 45) {
     ageData[4]++;
-  } else if (age < 50) {
+  } else if (props.ages[i] < 50) {
     ageData[5]++;
-  } else if (age < 55) {
+  } else if (props.ages[i] < 55) {
     ageData[6]++;
-  } else if (age < 60) {
+  } else if (props.ages[i] < 60) {
     ageData[7]++;
   } else {
     ageData[8]++;
   }
-});
+}
+
+let daysMax = props.days_of_uses[0];
+let daysMin = props.days_of_uses[0];
+let daysSum = 0;
+for (let i = 0; i < props.days_of_uses.length; i++) {
+  if (props.days_of_uses[i] > daysMax) {
+    daysMax = props.days_of_uses[i];
+  }
+  if (props.days_of_uses[i] < daysMin) {
+    daysMin = props.days_of_uses[i];
+  }
+  daysSum += props.days_of_uses[i];
+}
+const daysAve = Math.floor(daysSum / props.days_of_uses.length);
 
 const itLabels = ['IT系', 'それ以外'];
 const itData = [props.count_it, props.total - props.count_it];
@@ -51,12 +66,11 @@ function tabClicked(id) {
 </script>
 
 <template>
-  <Header>
-    統計情報
-  </Header>
-
-  <p class="text-center text-2xl text-gray-700 mb-4">
+  <p class="text-center text-2xl text-gray-700 mt-4">
     のべ就職者数 {{ total }}人
+  </p>
+  <p class="text-center text-2xl text-gray-700 mb-4">
+    平均利用期間 {{ daysAve }}日<span class="text-sm">(最短 {{ daysMin }}日, 最長 {{ daysMax }}日)</span>
   </p>
 
   <div class="bg-white pb-8">

@@ -31,6 +31,8 @@ class StatisticController extends Controller
             'handicaps' => Handicap::withCount(['affects'])->orderBy('sort')->get()->toArray(),
             // 雇用形態別人数
             'employment_patterns' => EmploymentPattern::withCount('workers')->orderBy('sort')->get()->toArray(),
+            // 利用日数
+            'days_of_uses' => $jobFinders->map(fn ($jobFinder) => $jobFinder->days_of_use),
         ]);
     }
 }

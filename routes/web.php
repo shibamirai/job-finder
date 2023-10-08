@@ -10,8 +10,8 @@ use Illuminate\Support\Facades\Route;
 
 Route::controller(PortfolioController::class)->group(function () {
     Route::redirect('/', 'portfolio');
-    Route::get('/portfolio', 'index')->name('index');
-    Route::get('/portfolio/{jobFinder}', 'show')->name('show');
+    Route::get('/portfolio', 'index')->name('portfolio.index');
+    Route::get('/portfolio/{jobFinder}', 'show')->name('portfolio.show');
 });
 
 Route::get('/statistics', [StatisticController::class, 'index'])->name('statistics');

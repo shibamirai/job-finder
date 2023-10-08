@@ -89,4 +89,14 @@ class JobFinder extends Model
             }
         );
     }
+
+    public function daysOfUse(): Attribute
+    {
+        return new Attribute(
+            get: fn () => date_diff(
+                    new DateTime($this->use_from),
+                    new DateTime($this->hired_at)
+                )->days
+            );
+    }
 }

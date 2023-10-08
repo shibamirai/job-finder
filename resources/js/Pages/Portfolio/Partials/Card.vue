@@ -44,7 +44,7 @@ defineProps({
           </tr>
         </table>
       </div>
-      <Link :href="route('show', jobFinder.id)">
+      <Link :href="route('portfolio.show', jobFinder.id)">
       <RoundButton v-if="jobFinder.works_count > 0" class="w-full justify-center mt-8">ポートフォリオを見る</RoundButton>
       <RoundButton v-else class="w-full justify-center mt-8" disabled>ポートフォリオを見る</RoundButton>
       </Link>

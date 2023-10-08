@@ -17,7 +17,7 @@ defineProps({
     <div class="bg-white rounded-lg px-10 py-8">
       <Detail :jobFinder="jobFinder" />
       <div class="flex justify-center">
-          <Link :href="route('index')">
+          <Link :href="route('portfolio.index')">
             <RoundButton class="w-48 justify-center">
               一覧へ戻る
             </RoundButton>

@@ -18,13 +18,19 @@ const open = ref(false);
             <div class="flex">
                 <!-- Logo -->
                 <div class="shrink-0 flex items-center">
-                    <Link :href="route('index')">
+                    <Link :href="route('portfolio.index')">
                         <ApplicationLogo class="w-36" />
                     </Link>
                 </div>
 
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <NavLink :href="route('statistics')" :active="$page.component === 'Statistics/Index'">
+                    <NavLink :href="route('portfolio.index')" :active="$page.component.startsWith('Portfolio/')">
+                        ポートフォリオ
+                    </NavLink >
+                </div>
+
+                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                    <NavLink :href="route('statistics')" :active="$page.component.startsWith('Statistics/')">
                         統計情報
                     </NavLink >
                 </div>
