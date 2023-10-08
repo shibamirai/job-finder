@@ -18,20 +18,32 @@ class OccupationController extends Controller
  
     public function store(OccupationRequest $request)
     {
-        $occupation = Occupation::firstOrCreate($request->safe()->all());
+        try {
+            $occupation = Occupation::firstOrCreate($request->safe()->all());
+        } catch (Exception $e) {
+            return back()->with('success', '追加に失敗しました');
+        }
         return redirect(route('occupations.index'))->with('success', $occupation->name .'を追加しました！');
     }
 
     public function update(Occupation $occupation, OccupationRequest $request)
     {
         $validated = $request->safe()->all();
-        $occupation->update($validated);
+        try {
+            $occupation->update($validated);
+        } catch (Exception $e) {
+            return back()->with('success', '更新に失敗しました');
+        }
         return redirect(route('occupations.index'))->with('success', $occupation->name .'を更新しました！');
     }
 
     public function destroy(Occupation $occupation)
     {
-        $occupation->delete();
+        try {
+            $occupation->delete();
+        } catch (Exception $e) {
+            return back()->with('success', '削除に失敗しました');
+        }
         return redirect(route('occupations.index'))->with('success', $occupation->name .'を削除しました！');
     }
 }
