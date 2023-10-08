@@ -14,18 +14,17 @@ class StatisticController extends Controller
 {
     public function index() : Response
     {
+        $jobFinders = JobFinder::with(['occupation'])->get();
+    
         return Inertia::render('Statistics/Index', [
             // 総就職人数
-            'total' => JobFinder::count(),
+            'total' => $jobFinders->count(),
             // 就職者年齢の配列
-            'ages' => JobFinder::get(['age'])
-                ->map(fn ($jobFinder) => $jobFinder->age),
+            'ages' => $jobFinders->map(fn ($jobFinder) => $jobFinder->age),
             // スキル別人数
             'skills' => Skill::withCount(['masters'])->get()->toArray(),
             // IT系職種の人数
-            'count_it' => JobFinder::whereHas('occupation', function ($q) {
-                $q->where('is_it', 1);
-            })->count(),
+            'count_it' => $jobFinders->filter(fn ($jobFinder) => $jobFinder->occupation->is_it)->count(),
             // 性別ごとの人数
             'genders' => Gender::withCount('workers')->orderBy('sort')->get()->toArray(),
             // 障害別人数
