@@ -15,7 +15,7 @@ defineProps({
         <div>
           <p class="text-sm">{{ jobFinder.age }}歳 {{ jobFinder.gender.name }}</p>
           <p class="text-xl font-bold text-cyan-500 tracking-wider">{{ jobFinder.occupation.name }}</p>
-          <p class="text-sm">{{ jobFinder.description.substr(32) }}</p>
+          <p class="text-sm">{{ jobFinder.description }}</p>
         </div>
       </header>
       <div class="mt-6 text-sm">

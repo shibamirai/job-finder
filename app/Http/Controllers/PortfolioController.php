@@ -27,27 +27,26 @@ class PortfolioController extends Controller
             ]);
         }
         return Inertia::render('Portfolio/Index', [
-            'jobFinders' => $jobFinders->toArray(),
+            'jobFinders' => $jobFinders,
         ]);
     }
 
-    public function show(string $id)
+    public function show(JobFinder $jobFinder)
     {
+        $jobFinder->load([
+            'employmentPattern:id,name',
+            'gender:id,name',
+            'handicaps:name',
+            'occupation:id,name',
+            'skills:name',
+            'works'
+        ])->setAppends([
+            'hired',
+            'period_of_use'
+        ]);
+
         return Inertia::render('Portfolio/Show', [
-            'jobFinder' => JobFinder::with([
-                    'employmentPattern:id,name',
-                    'gender:id,name',
-                    'handicaps:name',
-                    'occupation:id,name',
-                    'skills:name',
-                    'works'
-                ])
-                ->find($id)
-                ->setAppends([
-                    'hired',
-                    'period_of_use'
-                ])
-                ->toArray()
+            'jobFinder' => $jobFinder
         ]);
     }
 }

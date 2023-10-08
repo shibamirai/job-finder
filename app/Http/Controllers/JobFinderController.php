@@ -97,17 +97,18 @@ class JobFinderController extends Controller
         //
     }
 
-    public function edit(string $id)
+    public function edit(JobFinder $jobFinder)
     {
+        $jobFinder->load([
+            'skills:name',
+            'employmentPattern:id,name',
+            'gender:id,name',
+            'handicaps:id',
+            'occupation:id,name',
+            'works'
+        ]);
         return Inertia::render('JobFinders/Edit',[
-            'jobFinder' => JobFinder::with([
-                'skills:name',
-                'employmentPattern:id,name',
-                'gender:id,name',
-                'handicaps:id',
-                'occupation:id,name',
-                'works'
-            ])->find($id),
+            'jobFinder' => $jobFinder,
             'employmentPatterns' => EmploymentPattern::orderBy('sort')->get(['id', 'name']),
             'genders' => Gender::orderBy('sort')->get(['id', 'name']),
             'handicaps' => Handicap::orderBy('sort')->get(['id', 'name']),
