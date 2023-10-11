@@ -1,6 +1,6 @@
 # 就職者情報閲覧サイト
 
-Laravel 10 で作成
+Laravel 10 + Vue + Inertia.js で作成
 
 ## 動作環境
 
