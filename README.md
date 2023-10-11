@@ -1,6 +1,15 @@
 # 就職者情報閲覧サイト
 
-Laravel 10 + Vue + Inertia.js で作成
+Laravel 10 + Vue 3 + Inertia.js で作成
+
+|使用パッケージ|説明|
+|---|---|
+|vue-chartjs|統計グラフ作成に使用|
+|chartjs-plugin-datalabels|Chart.jsのグラフ上にラベルを追加|
+|@vueform/toggle|Vue3で使用できるトグルボタンコンポーネント|
+|vue-select@beta|複数選択可能なタグ付きセレクトボックスコンポーネント|
+|vue-i18n@9|Vueの多言語化対応($t()で言語切り替え)|
+|@intlify/unplugin-vue-i18n|多言語対応で使用するメッセージ定義を用意する|
 
 ## 動作環境
 
@@ -13,11 +22,11 @@ Laravel 10 + Vue + Inertia.js で作成
 
 任意のフォルダでプロジェクトをクローンし、composerでPHPライブラリを、npmでNode.jsパッケージをインストールする。
 
-```cmd
-> git clone https://github.com/shibamirai/job-finder.git
-> cd job-finder
-> composer install
-> npm install
+```bash
+git clone https://github.com/shibamirai/job-finder.git
+cd job-finder
+composer install
+npm install
 ```
 
 .env_sampleをコピーして.envを作成する。  
@@ -30,7 +39,7 @@ DB_CONNECTION=sqlite
 
 また、databaseフォルダの中に database.sqlite という名前で空のファイルを作成する。
 
-```cmd
+```bash
 job-finder
  └─ database
      ├─ factories
@@ -41,20 +50,20 @@ job-finder
 
 マイグレーション。
 
-```cmd
-> php artisan migrate
+```bash
+php artisan migrate
 ```
 
 Laravelアプリを最初に立ち上げるときはアプリケーションキーを作る必要があるため、以下を実行して作成する。
 
-```cmd
-> php artisan key:generate
+```bash
+php artisan key:generate
 ```
 
 起動する。
 
-```cmd
-> php artisan serve
+```bash
+php artisan serve
 ```
 
 [http://localhost:8000](http://localhost:8000)で閲覧できる。(ただしデータは空っぽ)
@@ -64,7 +73,7 @@ Laravelアプリを最初に立ち上げるときはアプリケーションキ�
 ログインしないとデータの入力ができないため、シーダーを使って管理者ユーザを作成する。(権限を設定しているわけではないので、厳密には管理者ではなくただの初期ユーザ)  
 .envに下記設定を追加すると、シーダーでユーザを作成できるようにしている。
 
-```cmd
+```bash
 MANAGER_NAME=名前
 MANAGER_EMAIL=メールアドレス
 MANAGER_PASSWORD=パスワード
@@ -72,8 +81,8 @@ MANAGER_PASSWORD=パスワード
 
 シーダー実行
 
-```cmd
-> php artisan db:seed
+```bash
+php artisan db:seed
 ```
 
 このアカウント情報で画面右上の```ログイン```からログインできる。
@@ -82,6 +91,6 @@ MANAGER_PASSWORD=パスワード
 
 ダミーデータ用シーダーを実行する
 
-```cmd
+```bash
 php artisan db:seed --class DummySeeder
 ```
