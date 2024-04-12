@@ -18,7 +18,7 @@ defineProps({
         {{ work.content }}{{ work.title ? '「' + work.title + '」' : '' }}
       </h1>
     </div>
-    <Link :href="work.url" class="text-cyan-500 mt-1">{{ work.url }}</Link>
+    <a :href="work.url" class="text-cyan-500 mt-1" target="_blank" rel="noopener noreferrer">{{ work.url }}</a>
     <h1 class="font-semibold mt-1">{{ work.languages }}／{{ work.period_of_creation }}</h1>
     <p class="text-sm leading-5 mt-2 whitespace-pre-wrap">{{ work.description }}</p>
   </article>
